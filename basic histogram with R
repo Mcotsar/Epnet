@@ -1,0 +1,231 @@
+#how to do a sad histogram in R (get data from http://www.r-bloggers.com/how-to-make-a-histogram-with-basic-r/)
+
+#Use read.table to read a folder .txt, if it were .csv we use read.csv
+chol<-read.table("alive.txt", header=TRUE)   
+> chol
+    AGE HEIGHT WEIGHT CHOL  SMOKE BLOOD  MORT
+1    20    176     77  195 nonsmo     b alive
+2    53    167     56  250 sigare     o  dead
+3    44    170     80  304 sigare     a  dead
+4    37    173     89  178 nonsmo     o alive
+5    26    170     71  206 sigare     o alive
+6    41    165     62  284 sigare     o alive
+7    39    174     75  232 sigare     o alive
+8    28    171     68  152   pipe     a alive
+9    33    180    100  209 sigare     a alive
+10   39    166     74  150 sigare     a alive
+11   43    176     63  280 sigare     o alive
+12   42    172     53  232 sigare     a alive
+13   34    165     69  237 nonsmo     b alive
+14   54    164     82  379   pipe     o  dead
+15   21    167     76  168   pipe     a alive
+16   37    168     86  307 sigare     o alive
+17   37    171     86  322   pipe     o alive
+18   30    181     74  191 nonsmo     a alive
+19   42    172     70  209 nonsmo     o alive
+20   41    178     84  195 sigare     a alive
+21   21    175     79  235 sigare     o alive
+22   35    187     89  232 sigare     a alive
+23   48    170     72  455   pipe     a alive
+24   40    181     86  193   pipe     o alive
+25   34    179     70  271   pipe     a alive
+26   38    170     78  260 nonsmo     a alive
+27   53    170     82  269 sigare     b alive
+28   37    178     72  220 sigare     a alive
+29   28    175     81  178   pipe     o alive
+30   21    185     80  154 sigare     a alive
+31   34    173     83  277 nonsmo     b alive
+32   30    179     75  225 sigare     a alive
+33   20    173     75  195 sigare     a alive
+34   34    179     79  214 sigare     a alive
+35   19    176     77  175 nonsmo     b alive
+36   38    179     79  107 sigare     a alive
+37   19    174     74  252 sigare     a alive
+38   34    172     71  217 sigare     o alive
+39   34    182     83  222 sigare     a alive
+40   35    156     77  234 nonsmo     a alive
+41   48    168     53  280 sigare     a  dead
+42   37    173     77  266 sigare     o alive
+43   37    173     83  278 sigare     a alive
+44   54    177     90  285 sigare     o alive
+45   29    179     80  257 nonsmo     a alive
+46   19    175     61  195 nonsmo     a alive
+47   48    168     86  230 sigare     b  dead
+48   42    170     78  218 sigare     o alive
+49   28    169     96  189   pipe     b alive
+50   47    177     81  258   pipe     o alive
+51   29    172     72  173 nonsmo     a  dead
+52   21    189     73  138 sigare     o alive
+53   19    178     70  171 sigare     a alive
+54   24    170     74  256   pipe     a alive
+55   27    166     69  270   pipe     o alive
+56   52    170     77  250   pipe     a alive
+57   30    170     74  205 sigare     o alive
+58   24    179     79  178 sigare     o alive
+59   49    168     74  296   pipe     a alive
+60   48    175     97  252 sigare     a alive
+61   37    191     92  235   pipe     a alive
+62   49    182    101  235 sigare     o  dead
+63   51    174     82  248 nonsmo     o alive
+64   45    176     76  297 sigare     b alive
+65   40    172     93  287 sigare     b  dead
+66   50    167     65  240 sigare     b alive
+67   39    163     76  223   pipe     o  dead
+68   37    171     84  330 nonsmo     o alive
+69   25    175     68  214 nonsmo     o alive
+70   24    170     64  233 nonsmo     a alive
+71   45    170     79  295 sigare     o alive
+72   25    172     74  240   pipe     a alive
+73   35    178     67  256 sigare     a alive
+74   34    170     69  207 sigare     b alive
+75   22    175     96  255 sigare     o alive
+76   42    173     86  245   pipe     a alive
+77   20    171     69  235 sigare     a alive
+78   35    160     59  254 sigare     o alive
+79   24    173     71  218   pipe     a alive
+80   24    176     66  176 nonsmo     a alive
+81   20    167     63  202 sigare     o alive
+82   37    185    110  254   pipe     a alive
+83   50    177     97  282 sigare     o alive
+84   38    167     75  275   pipe    ab alive
+85   47    178     94  189 sigare     a alive
+86   32    180     69  217 sigare    ab alive
+87   23    181     70  232   pipe     o alive
+88   22    175     80  223 sigare     o alive
+89   52    166     72  242 nonsmo     a  dead
+90   30    174     74  247 sigare     a alive
+91   18    177     76  214 sigare     o alive
+92   40    170     65  178 sigare     a alive
+93   40    164     65  238 nonsmo     a alive
+94   40    164     62  246 sigare    ab  dead
+95   39    170     80  218 sigare     o alive
+96   48    171     73  236 nonsmo     b alive
+97   20    176     77  230 sigare     a alive
+98   26    168     75  201 sigare     o alive
+99   42    168     66  282 sigare     o alive
+100  50    175     87  300 sigare     a  dead
+101  52    162     70  268 sigare     o alive
+102  20    179     84  239   pipe     o alive
+103  21    161     63  254 sigare     a alive
+104  21    170     58  200 sigare     o alive
+105  41    165     67  330 sigare     a alive
+106  52    175     84  227   pipe     o alive
+107  40    172     75  214 nonsmo     o alive
+108  48    166     75  285 sigare     a  dead
+109  37    174     69  260 sigare     b alive
+110  36    170     81  190 nonsmo     o  dead
+111  40    183     73  178 sigare     b alive
+112  33    186     96  234 sigare     a  dead
+113  38    173     77  222 nonsmo     a  dead
+114  39    173     81  297 sigare     o alive
+115  48    164     67  325 sigare     a alive
+116  48    169     80  219 nonsmo     o alive
+117  32    165     94  204 sigare     a alive
+118  39    170     64  218 sigare     a alive
+119  36    171     64  216   pipe     o alive
+120  42    167     89  228   pipe     o  dead
+121  42    164     68  272 nonsmo     o alive
+122  37    174     70  267   pipe     o  dead
+123  25    174     76  195 sigare     o alive
+124  37    162     72  264   pipe     o alive
+125  42    176     99  264   pipe     a alive
+126  43    159     57  280 sigare     o alive
+127  55    160     63  317 sigare     o alive
+128  49    167     72  244 nonsmo     o alive
+129  34    172     77  260   pipe     o alive
+130  34    182     81  204 nonsmo     o alive
+131  19    166     65  195 nonsmo     o alive
+132  37    180     85  240 nonsmo     o alive
+133  41    165     76  260 nonsmo     b alive
+134  19    170     68  195 nonsmo     o alive
+135  30    171     72  247   pipe     o alive
+136  37    172     81  294 nonsmo     o alive
+137  27    168     58  250 sigare     a alive
+138  41    161     75  229 nonsmo     a alive
+139  34    191     99  213 sigare     a  dead
+140  44    163     64  226   pipe     a alive
+141  26    168     73  160 sigare     o alive
+142  30    183     92  203 sigare     o alive
+143  29    186     92  221   pipe     o alive
+144  26    163     71  264   pipe     a alive
+145  36    171     71  201   pipe     o alive
+146  38    171     73  305 sigare     o alive
+147  40    179     68  225 sigare     o alive
+148  40    175     80  247 sigare     a alive
+149  39    172     68  280 sigare     a  dead
+150  30    178    110  179   pipe     a alive
+151  37    170     60  200 sigare     o alive
+152  37    180     88  238 nonsmo     o alive
+153  22    169     71  226 nonsmo     a alive
+154  19    175     66  244 nonsmo     o alive
+155  21    176     65  210   pipe     o alive
+156  38    169     73  198 sigare     a alive
+157  47    187     87  271 sigare     a  dead
+158  39    167     68  286 nonsmo    ab alive
+159  26    183     91  186 nonsmo     a alive
+160  40    170     81  206 sigare     o alive
+161  46    169     82  224 nonsmo     a alive
+162  28    175     86  233 sigare     a alive
+163  37    165     77  218 nonsmo    ab alive
+164  34    175     67  170 nonsmo     a alive
+165  33    178     83  239 sigare     o alive
+166  19    185     79  166   pipe     b alive
+167  21    186     90  196 sigare     o alive
+168  24    173     85  206 sigare     o alive
+169  39    175     70  185 sigare     o alive
+170  32    170     65  187 sigare     o alive
+171  32    156     70  255 sigare     a  dead
+172  39    168     64  205 sigare     o alive
+173  32    170     73  245 nonsmo     b alive
+174  31    173     87  215 sigare     a alive
+175  20    177     81  230 nonsmo     o alive
+176  42    165     76  196 sigare     o alive
+177  37    166     63  227 sigare     a  dead
+178  47    162     63  334 sigare     a alive
+179  44    173     73  304 sigare     o alive
+180  43    177     77  259 sigare     b alive
+181  58    172     86  180   pipe     o alive
+182  19    188     83  130 sigare     a alive
+183  41    172     77  234 nonsmo     o alive
+184  41    168     66  246 sigare     o  dead
+185  50    156     61  206 sigare     o alive
+186  39    168     68  230 sigare     b alive
+187  41    179     74  221 nonsmo     a alive
+188  49    161     61  268   pipe     b alive
+189  35    176     73  234 sigare     o alive
+190  37    173     67  259 sigare     o alive
+191  49    160     74  191 nonsmo     a alive
+192  34    179     78  189 nonsmo     o alive
+193  31    166     68  200 sigare     a alive
+194  37    159     82  256 nonsmo     a alive
+195  43    175     80  219 sigare     o alive
+196  35    174     57  222   pipe     a alive
+197  38    172     91  227 nonsmo     b alive
+198  26    170     60  167 sigare     a alive
+199  39    165     74  259 sigare     o alive
+200  49    178     81  275   pipe     b alive
+
+#to visualizate the histogram
+> hist(AirPassengers)
+
+#to select a column. For example, column AGE (REMEMBER=must be numeric, for example, you cannot select the column MORT)
+hist(chol$AGE)
+
+#to customize the histogram (col is color of the column)
+hist(AirPassengers, main="Passenger", border="grey", col="black")
+
+# to rotate the labels on the y axis by adding “las = 1” as an argument. las can be 0, 1, 2 or 3.
+hist(AirPassenger, las=1)
+
+#we use breaks to change the size of the column
+
+a=hist(AirPassengers, main="Passenger", border="grey", col="black", breaks=5, las=1)
+
+#change x-axis and y-axis
+
+inside () xlim=c(100,700) to change the number of the value from x to x
+
+inside () ylim=c(0,50) to change the number of the value from x to x
+
+#References http://www.rdocumentation.org/packages/graphics/functions/hist
+
