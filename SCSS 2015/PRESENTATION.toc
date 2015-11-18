@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.24pt}
+\beamer@sectionintoc {1}{Outline}{2}{0}{1}
+\beamer@sectionintoc {2}{Data}{6}{0}{2}
+\beamer@sectionintoc {3}{Method}{8}{0}{3}
+\beamer@sectionintoc {4}{Quantitative Analysis}{11}{0}{4}
+\beamer@sectionintoc {5}{Results and Discussion}{17}{0}{5}
