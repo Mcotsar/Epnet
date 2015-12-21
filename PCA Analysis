@@ -1,0 +1,55 @@
+#PCA components using data from "Analisis multivariable: una nueva guía para caracterización cerámica" written by Antonio Aguilera Pyrenae n. 29 
+
+library(ggplot2)
+library(gridExtra)
+library(MASS)
+
+#PCA components using Antonio paper
+mydata=read.csv ('antonio.csv', sep=";", header=T)
+logdata=log(mydata[,5:8])
+logdata
+pcaresults=princomp(logdata,center=T, scale=T)
+plot(pcaresults)
+pcavalues=as.data.frame(pcaresults$scores)
+pcavalues$region=mydata$region
+g1= ggplot(mydata, aes(x=height, y=width1, col=region))+ geom_point()
+g2= ggplot(pcavalues, aes(x=Comp.1, y=Comp.2, col=region))+ geom_point()
+grid.arrange(g1,g2)
+
+ 
+#useless variable 
+
+mydata$inutil=runif(164)
+logdatainutil=log(mydata[,5:8])
+logdatainutil=cbind(logdatainutil, log(mydata[,7]))
+pcaresultsinutil= princomp(logdatainutil, center=T, scale=T)
+pcaresultsinutil$loadings
+
+#K-means con PCA Values (training the maaachine)
+
+measures=pcavalues[,1:2]
+numgroups=4
+mykmeans=kmeans(measures, numgroups)
+amphkmeans=pcvalues
+Error: object 'pcvalues' not found
+amphkmeans=pcavalues
+amphkmeans$cluster=mykmeans$cluster
+g1= ggplot(amphkmeans, aes(x=Comp.1, y=Comp.2, colour=factor(cluster))) + geom_point() + facet_grid(~region)+ ggtitle("pcaantonio")
+g1
+measures=mydata[,5:8]
+numgroups=4
+mykmeans=kemans(measures, numgroups)
+Error: could not find function "kemans"
+mykmeans=kmeans(measures, numgroups)
+amphkmeans=pcavalues
+amphkmeans$cluster=mykmeans$cluster
+g2= ggplot(amphkmeans, aes(x=Comp.1, y=Comp.2, colour=factor(cluster)))+ geom_point() + facet_grid(~region) + ggtitle("datosori")
+grid.arrange(g1,g2)
+
+# how to save
+
+svg("plots.svg")
+grid.arrange(g1,g2)
+dev.off()
+
+
