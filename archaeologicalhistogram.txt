@@ -1,0 +1,37 @@
+#how to do a easy histogram with archaeological elements (If I did, you can do it, for sure!)
+
+> arqueo<-read.csv("hola.csv",header=TRUE)
+> arqueo
+   DISTRIBUCIÓN.DE.ARTEFACTOS NUMEROS.ENCONTRADOS
+1                           5                   2
+2                          10                   5
+3                          15                  12
+4                          20                  20
+5                          25                  15
+6                          30                   8
+7                          35                   3
+8                          40                   2
+9                          45                   2
+10                         50                   1
+11                         55                   1
+12                         60                   1
+ 
+#with plot we can create a easy plot at first
+> plot(arqueo)
+
+#we cannot create a hist of these data, we need to order them in this way. We need to join the distribution of artefacts and numbers found. 
+
+> rep(arqueo$DISTRIBUCIÓN.DE.ARTEFACTOS,arqueo$NUMEROS.ENCONTRADOS)
+ [1]  5  5 10 10 10 10 10 15 15 15 15 15 15 15 15 15 15 15 15 20 20 20 20 20 20
+[26] 20 20 20 20 20 20 20 20 20 20 20 20 20 20 25 25 25 25 25 25 25 25 25 25 25
+[51] 25 25 25 25 30 30 30 30 30 30 30 30 35 35 35 40 40 45 45 50 55 60
+> 
+> orig=rep(arqueo$DISTRIBUCIÓN.DE.ARTEFACTOS,arqueo$NUMEROS.ENCONTRADOS)
+> > hist(orig)
+
+#we use orig to create a new information that we will need to create this histogram
+> orig=rep(arqueo$DISTRIBUCIÓN.DE.ARTEFACTOS,arqueo$NUMEROS.ENCONTRADOS)
+#voilá
+> hist(orig)
+
+#References Quantify Archaeology by Stephen Shennan and PhD student Simon Carrignon
