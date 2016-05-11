@@ -5,6 +5,8 @@ library(MASS)
 library(caret)
 
 #####################CHECK OLD RESULTS##################################################
+#code  to be read by R
+
 
 myData <- read.csv('all.csv', header=T, sep=";")
 myData <- subset(myData, TYPE=="2")
