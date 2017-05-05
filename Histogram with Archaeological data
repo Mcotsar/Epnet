@@ -40,4 +40,4 @@
 barplot( arqueo$NUMEROS.ENCONTRADOS,arqueo$DISTRIBUCIÓN.DE.ARTEFACTOS)    
 > barplot( arqueo$NUMEROS.ENCONTRADOS) 
 
-#References Quantify Archaeology by Stephen Shennan and PhD student Simon Carrignon
+#References Quantify Archaeology by Stephen Shennan and PhD student Simon Paul Carrignon
