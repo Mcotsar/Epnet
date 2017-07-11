@@ -2,6 +2,9 @@
 
 library(plyr) #works to count
 
+library(raster)#calculate the coefficient of variation 
+
+
 #from the website https://alstatr.blogspot.com.es/2013/06/measure-of-relative-variability.html
 
 CV <- read.csv('drespaper.csv', header=T, sep=",")
@@ -18,6 +21,10 @@ count(CV)
 
 MN1 = subset(CV, site=="malpica")
 mpl = (MN1$protruding_rim)
+mean(mpl)
+
+MN1 = subset(CV, site=="malpica")
+mpl = (MN1$exterior_diam)
 mean(mpl)
 
 #Delicias
@@ -53,6 +60,10 @@ SD1 = subset(CV, site=="malpica")
 mpl1 = (SD1$protruding_rim)
 sd(mpl1)
 
+SD1 = subset(CV, site=="malpica")
+mpl1 = (SD1$exterior_diam)
+sd(mpl1)
+
 #Delicias
 
 SD2= subset(CV, site=="delicias")
@@ -79,22 +90,42 @@ sd(bln1)
 
 ##Calculate the coefficient of variation with the measurement protruding_rim as example
 
-#library raster 
-
-library(raster)
 
 mydata <- function(mean, sd){
       (sd/mean)*100
 }
 
-mydata(mean = , sd = )
+mydata(sd = , mean = )
 
 
+###EXAMPLE WITH MALPICA AND EXTERIOR_DIAM (MORE STANDARIZED MEASUREMENT)
+
+MN1 = subset(CV, site=="malpica")
+mpl = (MN1$exterior_diam)
+mean(mpl)
+
+SD1 = subset(CV, site=="malpica")
+mpl1 = (SD1$exterior_diam)
+sd(mpl1)
+
+mydata <- function(mean, sd){
+      (sd/mean)*100
+}
+
+mydata(sd = , mean = )
 
 
+#SOME RESULTS WITH EXTERIOR_DIAM MEASUREMENT###
 
+#MALPICA = sd(9.83), mean (166.05) -------> CV = 5.9199
 
+#DELICIAS = sd(8.52), mean (172.084) -------> CV = 4.95407
 
+#PARLAMENTO = sd(11.64), mean (163.8095) -------> CV = 7.106227
+
+#BELEN = sd(12.37), mean (171.1818) -------> CV = 7.226235
+
+#VILLASECA = sd(12.24), mean (160.2075) -------> CV = 7.64
 
 
 
